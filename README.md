@@ -128,3 +128,15 @@ You should see:
 [INFO]  snarkJS: OK!
 ```
 
+## Big picture!
+1. Design your arithmetic circuit and write your circuit using `circom`
+   - use your own code 
+   - use our safe templates
+2. Compile the circuit to get a low-level representation (r1cs)
+3. use snarkjs to compute your witness
+   - the prover uses the `witness` to generate a zk-proof, which the verifier uses to confirm correctness without seeing the `witness` itself
+   - In our case, `input.json` is for the witness generation. (setting a=3, b=4)
+   - Once you run `snarkjs` to calculate the witness from this input, it will compute (a=3,b=4,c=12)
+   - Even though `c` might be public, **a and b** are hidden in the zk-SNARK — but the witness ensures they exist and are valid
+4. generate a trusted setup and get your zk-SNARK proof
+5. validate your proof or have a smart-contract validate it!
