@@ -36,7 +36,40 @@ npm install -g snarkjs
 ```
 
 ## 🛠️ Setup Steps
-### 1. Compile the circuit
+
+Project Structure
+
+```
+zk_sum_product/
+ |---circuits/
+ |---inputs/
+ |---outputs/
+
+```
+
+### 1. Construct and compile the circuit
+
+In `circuits/`, constuct a file: `sum_product.circom`
+
+```bash
+pragma circom 2.0.0;
+
+template SumProduct() {
+
+    // Declaration of signals
+    signal input a;
+    signal input b;
+
+    signal output sum;
+    signal output product;
+
+    // Constraints - the operation that are going to perform via input (+/x)
+    sum <== a + b;
+    product <== a * b;
+}
+
+component main = SumProduct();
+```
 
 ```bash
 circom circuits/sum_product.circom --r1cs --wasm --sym -o outputs
@@ -94,3 +127,4 @@ You should see:
 ```
 [INFO]  snarkJS: OK!
 ```
+
